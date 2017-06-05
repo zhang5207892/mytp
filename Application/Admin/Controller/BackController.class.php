@@ -1,11 +1,11 @@
 <?php 
 namespace Admin\Controller;
 use Think\Controller;
+use \Org\Net\IpLocation;
 
 class BackController extends Controller {
 	// 完成后台的登录
 	public function login(){
-
 		// 验证
 		if(IS_POST){
 			// 登录的验证
@@ -68,10 +68,10 @@ class BackController extends Controller {
 		//获取ip地址
 		$ip = get_client_ip();
 		//引入UTFWry.dat定位地点文件，tp框架原是没有的，需下载
-		$Ipdat = new \Org\Net\IpLocation('UTFWry.dat');
-		$area = $Ipdat->getlocation($ip);
+		$Ipdat = new IpLocation('UTFWry.dat');
+		$area = $Ipdat->getlocation($ip);;
 		$data['Location']=$area['country'];
-		dump($data);
+		var_dump($data);
 		exit();
 		//存入数据库表
 		$User = M("login");
